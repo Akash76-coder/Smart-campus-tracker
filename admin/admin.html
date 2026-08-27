@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Smart Campus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- QR Code Generator Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="../admin/admin.css">
+</head>
+<body class="bg-slate-100 font-sans antialiased text-slate-800 selection:bg-cyan-300">
+
+    <nav class="bg-slate-950 text-white px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-cyan-500/20 p-2 rounded-lg border border-cyan-400/30">
+                <i class="fa-solid fa-user-shield text-cyan-400 text-xl"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg tracking-wide leading-tight">Admin Control Center</h1>
+                <p class="text-xs text-cyan-400 font-medium">Smart Campus Tracker & SLA Command</p>
+            </div>
+        </div>
+        <div class="flex gap-3">
+            <!-- Heatmap Button -->
+            <a href="../heatmap/heatmap.html" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-4 py-2 rounded-lg text-sm transition flex items-center gap-2 border border-red-500/30 font-semibold">
+                <i class="fa-solid fa-fire"></i> Live Heatmap
+            </a>
+            <button onclick="fetchComplaints()" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm transition flex items-center gap-2 border border-white/10 cursor-pointer">
+                <i class="fa-solid fa-rotate-right"></i> Refresh
+            </button>
+            <a href="../index/index.html" class="bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 px-4 py-2 rounded-lg text-sm transition flex items-center gap-2 border border-rose-500/30">
+                <i class="fa-solid fa-right-from-bracket"></i> Exit
+            </a>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto p-6 lg:p-8">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 fade-up">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-5">
+                <div class="bg-blue-100 text-blue-600 p-4 rounded-xl text-2xl"><i class="fa-solid fa-layer-group"></i></div>
+                <div>
+                    <p class="text-slate-500 text-sm font-medium">Total Reports</p>
+                    <h3 id="statTotal" class="text-3xl font-bold text-slate-800">0</h3>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-5">
+                <div class="bg-amber-100 text-amber-600 p-4 rounded-xl text-2xl"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div>
+                    <p class="text-slate-500 text-sm font-medium">Pending Issues</p>
+                    <h3 id="statPending" class="text-3xl font-bold text-slate-800">0</h3>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-5">
+                <div class="bg-emerald-100 text-emerald-600 p-4 rounded-xl text-2xl"><i class="fa-solid fa-check-double"></i></div>
+                <div>
+                    <p class="text-slate-500 text-sm font-medium">Resolved Cases</p>
+                    <h3 id="statSolved" class="text-3xl font-bold text-slate-800">0</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= QR GENERATOR SECTION WITH FLOOR ================= -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 fade-up">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-4">
+                <div>
+                    <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-qrcode text-cyan-600"></i> Instant QR Code Generator (with Floor)
+                    </h3>
+                    <p class="text-xs text-slate-500">Generate precise smart auto-fill QR codes including floor details.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Select Building</label>
+                    <select id="adminQrBlock" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-2.5 text-sm outline-none focus:border-cyan-500">
+                        <option value="mca">Vardhman Block (MCA)</option>
+                        <option value="cse">Academic Block (B.Tech)</option>
+                        <option value="lib">Central Library</option>
+                        <option value="hos">Hostel</option>
+                        <option value="can">Canteen</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Select Floor</label>
+                    <select id="adminQrFloor" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-2.5 text-sm outline-none focus:border-cyan-500">
+                        <option value="Ground Floor">Ground Floor</option>
+                        <option value="1st Floor" selected>1st Floor</option>
+                        <option value="2nd Floor">2nd Floor</option>
+                        <option value="3rd Floor">3rd Floor</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Room No.</label>
+                    <input type="text" id="adminQrRoom" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-2.5 text-sm outline-none focus:border-cyan-500" placeholder="e.g. 302">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Base URL</label>
+                    <input type="text" id="adminQrBaseUrl" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-2.5 text-sm outline-none text-slate-500 text-xs" value="http://localhost:5500/index/index.html">
+                </div>
+                <div>
+                    <button onclick="generateAdminQR()" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition shadow-md shadow-cyan-500/25 cursor-pointer">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Generate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Generated QR Display Area -->
+            <div id="adminQrResult" class="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-center gap-6 hidden">
+                <div id="adminQrcodeContainer" class="p-3 bg-white border-2 border-slate-300 rounded-xl shadow-sm"></div>
+                <div>
+                    <h4 id="adminQrLabel" class="font-bold text-slate-800 text-base"></h4>
+                    <p id="adminQrLinkText" class="text-xs text-cyan-600 font-mono mt-1 bg-cyan-50 px-2 py-1 rounded inline-block"></p>
+                    <p class="text-[11px] text-slate-400 mt-2">Print this poster and place it in the respective room.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-end mb-6 fade-up delay-100">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Live Complaint Feed & SLA Timers</h2>
+                <p class="text-sm text-slate-500 mt-1">Review critical issues with individual live countdown timers.</p>
+            </div>
+        </div>
+
+        <!-- Complaint Cards Container -->
+        <div id="adminComplaintsList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 fade-up delay-200">
+            <div class="col-span-full flex flex-col items-center justify-center py-20 opacity-50">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl text-cyan-600 mb-4"></i>
+                <p class="font-medium text-slate-600">Fetching live data from Firebase...</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../admin/admin.js"></script>
+</body>
+</html>

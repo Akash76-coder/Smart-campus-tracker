@@ -1,0 +1,33 @@
+/* campus_finder.css */
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+}
+
+/* 🔴 Building Red Glow & Pulse Animation */
+.building-glow {
+    animation: pulseGlow 1.5s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.8), inset 0 0 10px rgba(239, 68, 68, 0.6);
+        border-color: rgba(239, 68, 68, 1);
+        background-color: rgba(239, 68, 68, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 35px rgba(239, 68, 68, 1), inset 0 0 20px rgba(239, 68, 68, 0.9);
+        border-color: #ff0000;
+        background-color: rgba(239, 68, 68, 0.4);
+    }
+}
+
+/* Marker Pin Bounce Animation */
+.pin-pulse {
+    animation: bouncePin 1s infinite alternate;
+}
+
+@keyframes bouncePin {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}

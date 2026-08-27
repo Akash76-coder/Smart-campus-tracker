@@ -1,0 +1,60 @@
+/* login.css - Premium Login Page Styles */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8fafc;
+    /* Modern Light Dot Pattern Background */
+    background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+    background-size: 25px 25px;
+}
+
+/* Glassmorphism & Smooth Entry Animation for Login Card */
+.login-card {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes slideUpFade {
+    0% { 
+        opacity: 0; 
+        transform: translateY(40px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Input Fields Smooth Hover & Focus Effect */
+input {
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -4px rgba(37, 99, 235, 0.15); /* Light blue glow */
+}
+
+/* Button Click Interaction */
+button {
+    transition: all 0.2s ease-in-out;
+}
+
+button:active {
+    transform: scale(0.97); /* Click karne par thoda sa dabega */
+}
+
+/* Icon colors transition */
+.relative i {
+    transition: color 0.3s ease;
+}
+
+input:focus + .relative i,
+.relative:focus-within i {
+    color: #2563eb; /* Focus karne par icon blue ho jayega */
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Heatmap & Issue Density | Smart Campus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .fade-up { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .heatmap-card { transition: all 0.3s ease; }
+        .heatmap-card:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body class="bg-slate-900 font-sans antialiased text-slate-100 min-h-screen">
+
+    <!-- Top Navigation -->
+    <nav class="bg-slate-950 text-white px-8 py-4 flex justify-between items-center shadow-lg border-b border-slate-800 sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-red-500/20 p-2.5 rounded-xl border border-red-500/30">
+                <i class="fa-solid fa-fire text-red-500 text-xl animate-pulse"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg tracking-wide leading-tight">Live Issue Density Heatmap</h1>
+                <p class="text-xs text-slate-400 font-medium">Predictive Campus Maintenance Intelligence</p>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <a href="../admin/admin.html" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-sm transition flex items-center gap-2 border border-white/10">
+                <i class="fa-solid fa-arrow-left"></i> Back to Admin
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto p-6 lg:p-10">
+        
+        <!-- Header Info -->
+        <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 fade-up">
+            <div>
+                <h2 class="text-3xl font-extrabold tracking-tight">Campus Infrastructure Status</h2>
+                <p class="text-slate-400 text-sm mt-1">Real-time threat levels based on active pending complaints per block.</p>
+            </div>
+            <div class="flex items-center gap-4 bg-slate-800/60 p-3 rounded-2xl border border-slate-700/60 text-xs">
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> Safe (0-2)</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span> Warning (3-5)</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span> Critical (6+)</span>
+            </div>
+        </div>
+
+        <!-- Heatmap Grid Container -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-up">
+            
+            <!-- 1. Vardhman Block (MCA) -->
+            <div id="card-mca" class="heatmap-card bg-slate-800/80 border border-slate-700 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-slate-700/20 rounded-bl-full pointer-events-none"></div>
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-blue-500/20 text-blue-400 rounded-2xl text-xl">
+                            <i class="fa-regular fa-building"></i>
+                        </div>
+                        <span id="badge-mca" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Normal</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Vardhman Block (MCA)</h3>
+                    <p class="text-xs text-slate-400 mb-6">Computer Labs & Lecture Halls</p>
+                </div>
+                <div class="bg-slate-900/60 p-4 rounded-2xl border border-slate-700/50 flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Active Issues:</span>
+                    <span id="count-mca" class="text-2xl font-extrabold text-white">0</span>
+                </div>
+            </div>
+
+            <!-- 2. Academic Block (B.Tech) -->
+            <div id="card-cse" class="heatmap-card bg-slate-800/80 border border-slate-700 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-slate-700/20 rounded-bl-full pointer-events-none"></div>
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-purple-500/20 text-purple-400 rounded-2xl text-xl">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span id="badge-cse" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Normal</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Academic Block (B.Tech)</h3>
+                    <p class="text-xs text-slate-400 mb-6">CSE, ECE, Mechanical Departments</p>
+                </div>
+                <div class="bg-slate-900/60 p-4 rounded-2xl border border-slate-700/50 flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Active Issues:</span>
+                    <span id="count-cse" class="text-2xl font-extrabold text-white">0</span>
+                </div>
+            </div>
+
+            <!-- 3. Central Library -->
+            <div id="card-lib" class="heatmap-card bg-slate-800/80 border border-slate-700 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-slate-700/20 rounded-bl-full pointer-events-none"></div>
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-amber-500/20 text-amber-400 rounded-2xl text-xl">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <span id="badge-lib" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Normal</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Central Library</h3>
+                    <p class="text-xs text-slate-400 mb-6">Reading Halls & Digital Resource Center</p>
+                </div>
+                <div class="bg-slate-900/60 p-4 rounded-2xl border border-slate-700/50 flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Active Issues:</span>
+                    <span id="count-lib" class="text-2xl font-extrabold text-white">0</span>
+                </div>
+            </div>
+
+            <!-- 4. Hostels -->
+            <div id="card-hos" class="heatmap-card bg-slate-800/80 border border-slate-700 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-slate-700/20 rounded-bl-full pointer-events-none"></div>
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-rose-500/20 text-rose-400 rounded-2xl text-xl">
+                            <i class="fa-solid fa-bed"></i>
+                        </div>
+                        <span id="badge-hos" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Normal</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Hostels</h3>
+                    <p class="text-xs text-slate-400 mb-6">Boys & Girls Residential Hostels</p>
+                </div>
+                <div class="bg-slate-900/60 p-4 rounded-2xl border border-slate-700/50 flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Active Issues:</span>
+                    <span id="count-hos" class="text-2xl font-extrabold text-white">0</span>
+                </div>
+            </div>
+
+            <!-- 5. Central Canteen -->
+            <div id="card-can" class="heatmap-card bg-slate-800/80 border border-slate-700 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-slate-700/20 rounded-bl-full pointer-events-none"></div>
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-2xl text-xl">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <span id="badge-can" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Normal</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Central Canteen</h3>
+                    <p class="text-xs text-slate-400 mb-6">Food Court & Dining Areas</p>
+                </div>
+                <div class="bg-slate-900/60 p-4 rounded-2xl border border-slate-700/50 flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-medium">Active Issues:</span>
+                    <span id="count-can" class="text-2xl font-extrabold text-white">0</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script to calculate and color code heatmap -->
+    <script type="module" src="../heatmap/heatmap.js"></script>
+</body>
+</html>

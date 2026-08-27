@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Dashboard | Escalation Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../management/management.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-['Poppins'] selection:bg-purple-500 selection:text-white">
+
+    <!-- 🌟 Executive Top Navbar -->
+    <nav class="bg-slate-900 border-b border-purple-500/30 px-6 py-4 flex justify-between items-center shadow-lg relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-full bg-purple-500/5 blur-3xl pointer-events-none"></div>
+        <div class="flex items-center gap-4 relative z-10">
+            <div class="bg-gradient-to-br from-purple-600 to-indigo-600 w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
+                <i class="fa-solid fa-user-tie text-white text-lg"></i>
+            </div>
+            <div>
+                <h1 class="font-extrabold text-xl tracking-wide text-white leading-tight">Management <span class="text-purple-400">Portal</span></h1>
+                <p class="text-[10px] text-purple-200 uppercase tracking-widest font-semibold">Executive Escalation Desk</p>
+            </div>
+        </div>
+        <div class="flex gap-4 relative z-10">
+            <button onclick="fetchEscalatedComplaints()" class="bg-slate-800 hover:bg-slate-700 text-purple-400 border border-purple-500/30 px-4 py-2 rounded-lg text-sm font-bold transition flex items-center gap-2 cursor-pointer shadow-sm">
+                <i class="fa-solid fa-arrows-rotate"></i> Refresh
+            </button>
+            <a href="../index/index.html" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 px-4 py-2 rounded-lg text-sm font-bold transition flex items-center gap-2 cursor-pointer shadow-sm">
+                <i class="fa-solid fa-power-off"></i> Logout
+            </a>
+        </div>
+    </nav>
+
+    <!-- 📊 Main Dashboard Area -->
+    <div class="max-w-7xl mx-auto w-full p-6 lg:p-8 flex-1 flex flex-col">
+        
+        <!-- Stats Row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 text-purple-500/10 text-8xl group-hover:scale-110 transition-transform duration-500"><i class="fa-solid fa-file-circle-exclamation"></i></div>
+                <p class="text-sm text-slate-400 font-semibold mb-1">Total Escalated</p>
+                <h2 id="statTotalEscalated" class="text-4xl font-black text-white">0</h2>
+            </div>
+            
+            <div class="bg-slate-900 border border-amber-500/30 p-6 rounded-2xl shadow-xl relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 text-amber-500/10 text-8xl group-hover:scale-110 transition-transform duration-500"><i class="fa-solid fa-hourglass-half"></i></div>
+                <p class="text-sm text-amber-400 font-semibold mb-1">Pending Action</p>
+                <h2 id="statPendingMgmt" class="text-4xl font-black text-amber-500">0</h2>
+            </div>
+
+            <div class="bg-slate-900 border border-rose-500/30 p-6 rounded-2xl shadow-xl relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 text-rose-500/10 text-8xl group-hover:scale-110 transition-transform duration-500"><i class="fa-solid fa-ticket"></i></div>
+                <p class="text-sm text-rose-400 font-semibold mb-1">Penalties Issued</p>
+                <h2 id="statPenalties" class="text-4xl font-black text-rose-500">0</h2>
+            </div>
+        </div>
+
+        <div class="mb-4 flex items-center justify-between">
+            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-purple-500"></i> Escalated Issues Queue
+            </h2>
+            <span class="text-xs text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">Only Admin-Breached Critical Issues</span>
+        </div>
+
+        <!-- 📝 Escalated Complaints Grid -->
+        <div id="mgmtComplaintsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
+            <!-- JS will populate cards here -->
+        </div>
+
+    </div>
+
+    <!-- Firebase JS -->
+    <script type="module" src="../management/management.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Campus Tracker | Report Issue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css?v=1.1">
+</head>
+<body class="bg-slate-100 antialiased selection:bg-cyan-300 selection:text-slate-900 overflow-x-hidden relative">
+
+    <!-- 🔑 Top Right Login Buttons -->
+    <div class="absolute top-6 right-6 z-50 flex items-center gap-3">
+        <a href="../index/index.html" class="text-sm font-bold text-slate-500 hover:text-cyan-600 transition-colors bg-white/50 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-200/50 shadow-sm">
+            <i class="fa-solid fa-user-graduate mr-1"></i> Student Login
+        </a>
+        <a href="../login/login.html" class="text-sm font-bold text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 transition-all px-4 py-2 rounded-xl shadow-lg shadow-cyan-500/30">
+            <i class="fa-solid fa-user-shield mr-1"></i> Admin Login
+        </a>
+    </div>
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        
+        <!-- ================= LEFT SIDE ================= -->
+        <div class="md:w-5/12 bg-slate-950 text-white flex flex-col justify-between p-10 lg:p-14 relative overflow-hidden perspective-1000">
+            
+            <div class="blob bg-cyan-600 w-72 h-72 rounded-full top-[-10%] left-[-10%] opacity-40"></div>
+            <div class="blob bg-blue-700 w-80 h-80 rounded-full bottom-[-10%] right-[-10%] opacity-40" style="animation-delay: -5s;"></div>
+            
+            <div class="relative z-10 fade-up">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl mb-8 shadow-[0_0_20px_rgba(0,242,254,0.3)]">
+                    <i class="fa-solid fa-satellite-dish text-3xl text-cyan-400 animate-pulse"></i>
+                </div>
+                <h1 class="text-5xl lg:text-6xl font-extrabold mb-4 leading-[1.1] tracking-tight">
+                    Smart<br>Campus<br><span class="text-gradient">Tracker.</span>
+                </h1>
+                <p class="text-slate-300 text-base mb-8 font-light max-w-sm">
+                    Report campus issues and track live resolutions from the admin team transparently with SLA accountability.
+                </p>
+            </div>
+
+            <div class="relative z-10 mt-10 space-y-4 fade-up delay-200">
+                <!-- Track Public Reports Button -->
+                <button onclick="openTrackingModal()" class="w-full card-3d flex items-center justify-between bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/40 hover:to-orange-500/40 border border-amber-500/50 backdrop-blur-xl p-4 rounded-2xl transition-all duration-300 group cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-amber-500/20 p-2.5 rounded-xl border border-amber-400/50 group-hover:rotate-12 transition-transform">
+                            <i class="fa-solid fa-globe text-amber-400 text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-white text-sm">Campus Public Feed</h4>
+                            <p class="text-[11px] text-amber-200 mt-0.5">Track all issues & your App No.</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-white"></i>
+                </button>
+
+                <!-- 3D Campus Finder Button -->
+                <a href="../campus_finder/campus_finder.html" class="w-full card-3d flex items-center justify-between bg-gradient-to-r from-blue-900/50 to-cyan-900/50 hover:from-blue-800/80 hover:to-cyan-800/80 border border-cyan-500/30 backdrop-blur-xl p-4 rounded-2xl transition-all duration-300 group block">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-cyan-500/20 p-2.5 rounded-xl border border-cyan-400/50 group-hover:rotate-12 transition-transform">
+                            <i class="fa-solid fa-map-location-dot text-cyan-400 text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-white text-sm">3D Campus Finder</h4>
+                            <p class="text-[11px] text-cyan-200 mt-0.5">View live routing & heatmap</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-white"></i>
+                </a>
+
+                <!-- 🚨 EMERGENCY SOS PANIC BUTTON -->
+                <button onclick="triggerEmergencySOS()" class="w-full card-3d flex items-center justify-between bg-gradient-to-r from-red-600/30 to-rose-600/30 hover:from-red-600/50 hover:to-rose-600/50 border border-red-500/60 backdrop-blur-xl p-4 rounded-2xl transition-all duration-300 group cursor-pointer shadow-lg shadow-red-500/20">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-red-500/30 p-2.5 rounded-xl border border-red-400/50 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-triangle-exclamation text-red-400 text-lg animate-bounce"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-white text-sm">Emergency SOS</h4>
+                            <p class="text-[11px] text-red-200 mt-0.5">Instant guard & Dean alert</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-shield-halved text-red-400"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= RIGHT SIDE (Form & Coupon) ================= -->
+        <div class="md:w-7/12 bg-slate-50 flex items-center justify-center p-6 lg:p-8 relative overflow-hidden pt-20 lg:pt-8">
+            <div class="absolute inset-0 z-0 opacity-[0.03]" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+            <div class="w-full max-w-xl bg-white p-6 lg:p-8 rounded-[2rem] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] border border-slate-100 relative z-10 fade-up delay-200 max-h-[90vh] overflow-y-auto custom-scrollbar">
+                
+                <!-- 🎟️ PENALTY COUPON SECTION (Hidden by default, shown via JS if Mgmt SLA breaches) -->
+                <div id="couponSection" class="hidden bg-gradient-to-r from-amber-500/20 to-red-500/20 border border-amber-500/40 p-4 rounded-2xl mb-6 space-y-3 fade-up">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-amber-500/20 p-2 rounded-xl text-amber-600">
+                                <i class="fa-solid fa-ticket text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-xs">SLA Penalty Coupon Unlocked!</h3>
+                                <p class="text-[11px] text-slate-600">Management failed to resolve issue in time.</p>
+                            </div>
+                        </div>
+                        <span class="bg-red-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">Active</span>
+                    </div>
+                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
+                        <div>
+                            <span class="text-[9px] text-slate-400 block">Voucher Code:</span>
+                            <span id="couponCodeText" class="font-mono text-cyan-400 font-bold text-xs">PENALTY-COER-901</span>
+                        </div>
+                        <button onclick="redeemCoupon()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition shadow cursor-pointer">
+                            Redeem Fee Discount
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h2 class="text-3xl font-extrabold text-slate-800 tracking-tight">Submit a Report</h2>
+                    <p class="text-slate-500 mt-1 text-sm font-medium">You will receive an <strong class="text-cyan-600">Application Number</strong> to track this issue.</p>
+                </div>
+
+                <form id="complaintForm" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1.5">Issue Title <span class="text-rose-500">*</span></label>
+                        <div class="relative group">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </span>
+                            <input type="text" id="title" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 pl-12 pr-4 text-sm font-medium outline-none focus:bg-white focus:border-cyan-400 transition-all placeholder-slate-400" placeholder="e.g., Projector is not working" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1.5">Block <span class="text-rose-500">*</span></label>
+                            <select id="block" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 px-4 text-sm font-medium outline-none focus:bg-white focus:border-cyan-400 transition-all cursor-pointer" required>
+                                <option value="" disabled selected>Select Area...</option>
+                                <option value="mca 1st year">Vardhman Block (MCA)</option>
+                                <option value="btech cse">Academic Block (B.Tech)</option>
+                                <option value="library">Central Library</option>
+                                <option value="hostel">Boys/Girls Hostel</option>
+                                <option value="canteen">Central Canteen</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1.5">Room No. <span class="text-rose-500">*</span></label>
+                            <input type="text" id="room" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 px-4 text-sm font-medium outline-none focus:bg-white focus:border-cyan-400 transition-all placeholder-slate-400" placeholder="e.g., Lab 402" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1.5">Category <span class="text-rose-500">*</span></label>
+                            <select id="category" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 px-4 text-sm font-medium outline-none focus:bg-white focus:border-cyan-400 transition-all cursor-pointer">
+                                <option value="Electrical">⚡ Electrical</option>
+                                <option value="Plumbing">🚰 Plumbing</option>
+                                <option value="IT/Network">💻 IT/Network</option>
+                                <option value="Furniture">🪑 Furniture</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1.5">Priority <span class="text-rose-500">*</span></label>
+                            <select id="priority" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 px-4 text-sm font-medium outline-none focus:bg-white focus:border-cyan-400 transition-all cursor-pointer">
+                                <option value="Low">🟢 Low</option>
+                                <option value="Medium" selected>🟡 Medium</option>
+                                <option value="Critical">🔴 Critical (Urgent Resolution Required)</option>
+                            </select>
+                        </div>
+                    </div>
+                     
+                     <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label class="block text-sm font-bold text-slate-700">Enter Your CU ID <span class="text-rose-500">*</span></label>
+                            <button type="button" onclick="startVoiceInput()" class="text-xs bg-cyan-50 text-cyan-600 hover:bg-cyan-100 font-bold px-2.5 py-1 rounded-lg border border-cyan-200 flex items-center gap-1 transition cursor-pointer">
+                                <i class="fa-solid fa-microphone text-rose-500 animate-pulse" id="micIcon"></i> Voice Input
+                            </button>
+                        </div>
+                        <textarea id="cuid" rows="1" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 px-4 text-sm font-medium outline-none focus:bg-white focus:border-cyan-400 transition-all placeholder-slate-400 resize-none" placeholder="Enter Your CU ID" required></textarea>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label class="block text-sm font-bold text-slate-700">Description <span class="text-rose-500">*</span></label>
+                            <button type="button" onclick="startVoiceInput()" class="text-xs bg-cyan-50 text-cyan-600 hover:bg-cyan-100 font-bold px-2.5 py-1 rounded-lg border border-cyan-200 flex items-center gap-1 transition cursor-pointer">
+                                <i class="fa-solid fa-microphone text-rose-500 animate-pulse" id="micIcon"></i> Voice Input
+                            </button>
+                        </div>
+                        <textarea id="description" rows="3" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-3 px-4 text-sm font-medium outline-none focus:bg-white focus:border-cyan-400 transition-all placeholder-slate-400 resize-none" placeholder="Explain the exact problem here..." required></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1.5">Attach Proof <span class="text-slate-400 font-normal">(Optional)</span></label>
+                        <div class="flex items-center justify-center w-full">
+                            <label for="image" class="flex flex-col items-center justify-center w-full h-24 border-2 border-slate-300 border-dashed rounded-xl cursor-pointer bg-slate-50 hover:bg-cyan-50 hover:border-cyan-400 transition-all group">
+                                <div class="flex flex-col items-center justify-center pt-3 pb-4">
+                                    <i class="fa-solid fa-cloud-arrow-up text-cyan-500 text-2xl mb-1 group-hover:scale-110 transition-transform"></i>
+                                    <p id="fileNameDisplay" class="text-xs text-slate-500"><span class="font-semibold text-cyan-600">Click to upload</span> or drag image</p>
+                                </div>
+                                <input id="image" type="file" class="hidden" accept="image/*" />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg py-4 px-4 rounded-xl flex items-center justify-center gap-3 relative overflow-hidden group cursor-pointer shadow-lg shadow-cyan-500/20">
+                            <span class="relative z-10">Submit Report & Get ID</span>
+                            <i class="fa-solid fa-paper-plane relative z-10 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PUBLIC TRACKING MODAL ================= -->
+    <div id="trackingModal" class="fixed inset-0 z-[100] hidden bg-slate-900/60 backdrop-blur-sm flex justify-center items-center opacity-0 transition-opacity duration-300">
+        <div class="bg-white w-full max-w-3xl mx-4 rounded-3xl shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col max-h-[85vh]">
+            <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-3xl">
+                <div class="flex items-center gap-3">
+                    <div class="bg-amber-100 text-amber-600 p-2 rounded-lg">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800">Campus Public Feed</h3>
+                        <p class="text-xs text-slate-500 font-medium">Track all issues or search your Application No.</p>
+                    </div>
+                </div>
+                <button onclick="closeTrackingModal()" class="text-slate-400 hover:text-rose-500 transition-colors cursor-pointer">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-4 bg-white border-b border-slate-100 flex gap-2">
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+                    <input type="text" id="searchInput" placeholder="Search by App No. (e.g. COER-123456) or Building..." 
+                           class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl py-2.5 pl-11 pr-4 text-sm font-medium outline-none focus:border-cyan-400 transition-colors">
+                </div>
+                <button id="searchBtn" class="bg-cyan-600 hover:bg-cyan-700 text-white px-5 rounded-xl text-sm font-bold transition-colors cursor-pointer">
+                    Search
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto custom-scrollbar flex-1 bg-slate-50/50" id="complaintsList">
+                <p class="text-center text-slate-400 text-sm mt-10 italic"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Fetching live campus data...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CUSTOM SOS WARNING MODAL ================= -->
+    <div id="sosModal" class="fixed inset-0 z-[200] hidden bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white max-w-md w-full p-6 rounded-3xl shadow-2xl border-4 border-red-500 text-center transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-black text-slate-900 mb-2">EMERGENCY ALERT</h3>
+            <p class="text-xs text-slate-600 mb-6 leading-relaxed">
+                Are you in immediate danger? This will instantly broadcast your live location to Campus Security and Dean Ma'am.
+            </p>
+            <div class="flex gap-3">
+                <button onclick="closeSosModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition text-sm cursor-pointer">
+                    Cancel
+                </button>
+                <button onclick="confirmAndRedirectSOS()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-red-500/30 cursor-pointer">
+                    Yes, Dispatch SOS!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../index/index.js"></script>
+    <script>
+        const modal = document.getElementById('trackingModal');
+        const modalChild = modal.querySelector('div');
+
+        function openTrackingModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalChild.classList.remove('scale-95');
+            }, 10);
+            window.dispatchEvent(new Event('loadReportsEvent'));
+        }
+
+        function closeTrackingModal() {
+            modal.classList.add('opacity-0');
+            modalChild.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        function redeemCoupon() {
+            alert("🎉 Success! ₹500 Fee Discount Voucher applied to your student account.");
+            document.getElementById('couponSection').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

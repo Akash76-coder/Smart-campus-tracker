@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SOS Alert Active</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-red-50 h-screen flex items-center justify-center p-6">
+    <div class="bg-white p-8 rounded-3xl shadow-2xl border-4 border-red-500 max-w-md w-full text-center">
+        <div class="w-20 h-20 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+            <i class="fa-solid fa-siren-on text-4xl"></i>
+        </div>
+        <h1 class="text-2xl font-black text-slate-800 mb-2">SOS ALERT ACTIVE!</h1>
+        <p class="text-slate-600 mb-6">Your location has been broadcast to Campus Security and Dean Ma'am.</p>
+        
+        <div class="bg-slate-900 p-4 rounded-xl text-left mb-6">
+            <p class="text-[10px] text-slate-400 uppercase tracking-widest">Help Dispatching To:</p>
+            <p id="sosLocation" class="text-cyan-400 font-mono font-bold">Detecting your location...</p>
+        </div>
+
+        <button onclick="window.location.href='../index/index.html'" class="w-full bg-slate-800 text-white font-bold py-3 rounded-xl hover:bg-slate-700 transition">
+            Back to Home
+        </button>
+    </div>
+
+    <script>
+        // URL se location fetch karke yahan dikhao
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('sosLocation').innerText = params.get('loc') || "Current Building Zone";
+    </script>
+</body>
+</html>

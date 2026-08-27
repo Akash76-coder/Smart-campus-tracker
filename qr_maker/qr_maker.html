@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator | Smart Campus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>body { font-family: 'Poppins', sans-serif; }</style>
+</head>
+<body class="bg-slate-100 flex items-center justify-center min-h-screen p-6">
+
+    <div class="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full border border-slate-200">
+        <h2 class="text-2xl font-extrabold text-slate-800 mb-2">QR Poster Generator</h2>
+        <p class="text-slate-500 text-sm mb-6">Create smart QR codes with short URLs.</p>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Select Building</label>
+                <select id="qrBlock" class="w-full border-2 border-slate-200 rounded-xl p-3 outline-none focus:border-cyan-500">
+                    <option value="mca">Vardhman Block (MCA)</option>
+                    <option value="cse">Academic Block (B.Tech)</option>
+                    <option value="lib">Central Library</option>
+                    <option value="hos">Hostel</option>
+                    <option value="can">Canteen</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Room No. (e.g., 302)</label>
+                <input type="text" id="qrRoom" class="w-full border-2 border-slate-200 rounded-xl p-3 outline-none focus:border-cyan-500" placeholder="Enter room number">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Base URL</label>
+                <!-- Yahan ab tumhara ASLI LAN IP address set hai -->
+                <input type="text" id="qrBaseUrl" class="w-full border-2 border-slate-200 rounded-xl p-3 outline-none text-slate-500 text-sm" value="" placeholder="Leave blank to use current site URL">
+            </div>
+            
+            <button onclick="generateQR()" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl mt-4 transition">
+                Generate Smart QR
+            </button>
+        </div>
+
+        <div id="qrResult" class="mt-8 flex flex-col items-center hidden">
+            <div id="qrcode" class="p-4 bg-white border-4 border-slate-800 rounded-xl shadow-lg"></div>
+            <p id="qrLabel" class="mt-4 font-bold text-slate-800 text-lg uppercase tracking-wide"></p>
+            <p id="qrLinkDisplay" class="text-[10px] text-cyan-600 font-semibold mt-1 bg-cyan-50 px-2 py-1 rounded"></p>
+            <p class="text-xs text-slate-500 mt-2">Scan to auto-fill location</p>
+        </div>
+    </div>
+
+    <script>
+        function generateQR() {
+            const block = document.getElementById('qrBlock').value;
+            const room = document.getElementById('qrRoom').value.trim();
+            const baseUrl = document.getElementById('qrBaseUrl').value.trim() || new URL('../index/index.html', window.location.href).href;
+
+            if(!room) { alert("Please enter a room number!"); return; }
+
+            const finalUrl = `${baseUrl}?q=${block}_${room}`;
+
+            document.getElementById('qrcode').innerHTML = "";
+            
+            new QRCode(document.getElementById("qrcode"), {
+                text: finalUrl,
+                width: 200,
+                height: 200,
+                colorDark : "#0f172a", 
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            document.getElementById('qrLabel').innerText = `Room: ${room}`;
+            document.getElementById('qrLinkDisplay').innerText = `Link: ?q=${block}_${room}`;
+            document.getElementById('qrResult').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

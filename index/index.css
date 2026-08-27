@@ -1,0 +1,110 @@
+/* =========================================
+   index.css - Smart Campus Tracker (Final)
+   ========================================= */
+
+/* 🖋️ Base Font Apply */
+body { 
+    font-family: 'Poppins', sans-serif; 
+}
+
+/* 🎬 Fade Up Animations */
+.fade-up {
+    animation: fadeUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(40px);
+}
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+
+@keyframes fadeUpAnim { 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* 🔵 Floating Blob Background Effect */
+.blob {
+    position: absolute;
+    filter: blur(80px);
+    z-index: 0;
+    animation: floatBlob 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(30px, -50px) scale(1.2); }
+}
+
+/* 🧊 3D Card Hover Effects (For Left Side Buttons) */
+.perspective-1000 {
+    perspective: 1000px;
+}
+.card-3d {
+    transition: all 0.4s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+.card-3d:hover {
+    transform: translateY(-8px) rotateX(4deg) rotateY(-4deg);
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ✨ Premium Text Gradient */
+.text-gradient {
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 🔘 3D Button Effect (For Main Form Submit Button) */
+.btn-3d {
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.5);
+}
+.btn-3d:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 25px -5px rgba(14, 165, 233, 0.6);
+}
+
+/* 🎨 Custom Premium Scrollbar (For Form Section) */
+.custom-scrollbar::-webkit-scrollbar { 
+    width: 6px; 
+}
+.custom-scrollbar::-webkit-scrollbar-track { 
+    background: #f8fafc; /* light slate */
+    border-radius: 10px; 
+}
+.custom-scrollbar::-webkit-scrollbar-thumb { 
+    background: #cbd5e1; /* slate-300 */
+    border-radius: 10px; 
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { 
+    background: #94a3b8; /* slate-400 */
+}
+
+/* =========================================
+   🛠️ FORM FIXES & ALIGNMENT (NEW ADDITIONS)
+   ========================================= */
+
+/* Smooth transitions for all inputs to look modern */
+input, select, textarea {
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* Focus State: Soft Glowing Cyan Border when clicking inside an input */
+input:focus, select:focus, textarea:focus {
+    box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15) !important;
+    border-color: #06b6d4 !important;
+    background-color: #ffffff !important;
+    outline: none !important;
+}
+
+/* Icon Animation: When user clicks input, the side-icon scales up and turns cyan */
+.group:focus-within i.fa-pen-nib {
+    color: #06b6d4 !important;
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+}
+
+/* Fix for Select Dropdown Arrow spacing */
+select {
+    cursor: pointer;
+    appearance: auto !important; /* Ensures the default dropdown arrow looks good */
+}

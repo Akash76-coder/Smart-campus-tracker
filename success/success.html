@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Submitted | Smart Campus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../index/index.css">
+</head>
+<body class="bg-slate-950 font-sans antialiased min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+
+    <!-- Background Effects -->
+    <div class="absolute inset-0 z-0 opacity-[0.05]" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
+    <div class="blob bg-cyan-600 w-96 h-96 rounded-full top-[-10%] left-[-10%] opacity-30 absolute"></div>
+    <div class="blob bg-emerald-600 w-96 h-96 rounded-full bottom-[-10%] right-[-10%] opacity-20 absolute" style="animation-delay: -5s;"></div>
+
+    <!-- Success Card -->
+    <div class="bg-white p-8 lg:p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] max-w-lg w-full text-center relative z-10 fade-up border border-white/20">
+        
+        <div class="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+            <i class="fa-solid fa-check text-5xl text-emerald-500"></i>
+        </div>
+        
+        <h2 class="text-3xl font-extrabold text-slate-800 mb-2 tracking-tight">Report Submitted!</h2>
+        <p class="text-slate-500 text-sm mb-8 font-medium">Your issue has been forwarded to the campus administration.</p>
+
+        <!-- Tracking ID Box -->
+        <div class="bg-cyan-50 border-2 border-cyan-100 rounded-2xl p-6 mb-8 relative group cursor-pointer hover:border-cyan-300 transition-colors" onclick="copyId()">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-600 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+                Application Number
+            </div>
+            
+            <h1 id="displayId" class="text-4xl font-extrabold text-cyan-700 tracking-wider mt-2">Loading...</h1>
+            
+            <p id="copyText" class="text-xs text-cyan-600 font-semibold mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <i class="fa-regular fa-copy"></i> Click to copy
+            </p>
+        </div>
+
+        <p class="text-xs text-slate-400 mb-8 max-w-xs mx-auto">Please save this number securely. You can use it to track your report status in the Public Feed.</p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col gap-3">
+            <a href="../index/index.html" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex justify-center items-center gap-2 group">
+                <i class="fa-solid fa-house group-hover:-translate-y-1 transition-transform"></i> Return to Home
+            </a>
+            <a href="../campus_finder/campus_finder.html" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3.5 rounded-xl transition-all flex justify-center items-center gap-2">
+                <i class="fa-solid fa-map-location-dot"></i> View Campus Map
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // URL se Tracking ID nikalna (e.g., success.html?id=COER-123456)
+        const urlParams = new URLSearchParams(window.location.search);
+        const trackingId = urlParams.get('id');
+        
+        const displayId = document.getElementById('displayId');
+
+        if(trackingId) {
+            displayId.innerText = trackingId;
+        } else {
+            displayId.innerText = "ERROR-404";
+            displayId.classList.replace('text-cyan-700', 'text-rose-600');
+        }
+
+        // Copy to clipboard function
+        function copyId() {
+            if(trackingId) {
+                navigator.clipboard.writeText(trackingId);
+                const copyText = document.getElementById('copyText');
+                copyText.innerHTML = `<i class="fa-solid fa-check text-emerald-500"></i> Copied!`;
+                copyText.classList.replace('opacity-0', 'opacity-100');
+                
+                setTimeout(() => {
+                    copyText.innerHTML = `<i class="fa-regular fa-copy"></i> Click to copy`;
+                    copyText.classList.remove('opacity-100');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
